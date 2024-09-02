@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: #fab22e;
+        }
+        .wrapper{
+            width: 80vmin;
+            background: black;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 10px 10px 5px rgba(0, 0, 0, .5);
+        }
+        .wrapper span{
+            font-size: 100px;
+            display: block;
+            text-align: center;
+        }
+        p{
+            margin-top: 30px;
+            color: #fff;
+            font-size: 20px;
+            line-height: 30px;
+            word-wrap: break-word;
+            opacity: 0;
+        }
+        .fade{
+            opacity: 1;
+            transition: opacity 1.5s;
+        }
+        .wrapper button{
+            background-color: #fab22e;
+            color: black;
+            padding: 10px 20px;
+            font-weight: 600;
+            outline: 0;
+            border: 0;
+            margin: 20px auto;
+            display: block;
+            font-size: 21px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .wrapper button:hover{
+            background-color: #b08027;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <span>&#128514;</span>
+        <p id="joke"></p>
+        <button id="btn">Random Joke</button>
+    </div>
+
+    <script>
+        const joke= document.getElementById('joke');
+        const btn= document.getElementById('btn');
+        const url= "https://v2.jokeapi.dev/joke/Any?type=single";
+        const jokeApi= ()=> {
+            joke.classList.remove('fade');
+            fetch(url)
+            .then(data=> data.json())
+            .then(item=> {
+                
+                joke.textContent= item.joke;
+                joke.classList.add('fade');
+            })
+        }
+        btn.addEventListener('click', jokeApi);
+    </script>
+</body>
+</html>
